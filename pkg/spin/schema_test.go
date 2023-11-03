@@ -1,8 +1,9 @@
-package skeletor
+package spin
 
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/ghodss/yaml" // We are not using go-yaml because of serialization problems with jsonschema, don't use this library elsewhere
@@ -17,7 +18,7 @@ func TestMixin_PrintSchema(t *testing.T) {
 	m.PrintSchema()
 	gotSchema := m.TestContext.GetOutput()
 
-	wantSchema, err := ioutil.ReadFile("schema/schema.json")
+	wantSchema, err := os.ReadFile("schema/schema.json")
 	require.NoError(t, err)
 
 	assert.Equal(t, string(wantSchema), gotSchema)

@@ -1,4 +1,4 @@
-package skeletor
+package spin
 
 import (
 	"get.porter.sh/porter/pkg/runtime"
