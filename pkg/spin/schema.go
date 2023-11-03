@@ -1,4 +1,4 @@
-package skeletor
+package spin
 
 import (
 	_ "embed"

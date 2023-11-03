@@ -1,6 +1,6 @@
-module github.com/getporter/skeletor
+module github.com/schristoff/spin-mixin
 
-go 1.19
+go 1.21
 
 // These are replace directives copied from porter
 // When you use a newer version of Porter, if you run into trouble with go mod tidy
@@ -48,6 +48,7 @@ require (
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/dsnet/compress v0.0.2-0.20210315054119-f66993602bf5 // indirect
 	github.com/fatih/color v1.13.0 // indirect
+	github.com/fermyon/spin/sdk/go/v2 v2.0.0-rc.1 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -64,6 +65,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/jeremywohl/flatten v1.0.1 // indirect
+	github.com/julienschmidt/httprouter v1.3.0 // indirect
 	github.com/klauspost/compress v1.15.12 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
