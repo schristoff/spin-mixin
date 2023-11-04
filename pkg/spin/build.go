@@ -9,10 +9,9 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-const dockerfileLines = `RUN apt-get update && apt-get install -y wget tar && \
-wget https://github.com/fermyon/spin/releases/download/v2.0.0-rc.1/spin-v2.0.0-rc.1-linux-amd64.tar.gz --progress=dot:giga && \
-tar -xvf spin-v2.0.0-rc.1-linux-amd64.tar.gz -C /usr/bin/ && \
-spin plugin install -y --url https://github.com/fermyon/platform-plugin/releases/download/canary/platform.json`
+const dockerfileLines = `RUN apt update && apt install -y wget tar git && \
+wget https://github.com/fermyon/spin/releases/download/v2.0.0/spin-v2.0.0-linux-amd64.tar.gz --progress=dot:giga && \
+tar -xzvf spin-v2.0.0-linux-amd64.tar.gz -C /usr/bin/  `
 
 // BuildInput represents stdin passed to the mixin for the build command.
 type BuildInput struct {
