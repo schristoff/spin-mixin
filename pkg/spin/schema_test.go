@@ -2,7 +2,6 @@ package spin
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -42,7 +41,7 @@ func TestMixin_ValidateSchema(t *testing.T) {
 	for _, tc := range testcases {
 		t.Run(tc.name, func(t *testing.T) {
 			// Read the mixin input as a go dump
-			mixinInputB, err := ioutil.ReadFile(tc.file)
+			mixinInputB, err := os.ReadFile(tc.file)
 			require.NoError(t, err)
 			mixinInputMap := make(map[string]interface{})
 			err = yaml.Unmarshal(mixinInputB, &mixinInputMap)

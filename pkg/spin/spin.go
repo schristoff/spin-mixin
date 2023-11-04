@@ -18,7 +18,7 @@ type Mixin struct {
 
 // commandPreRun runs setup tasks applicable for every action
 func (m *Mixin) commandPreRun(ctx context.Context, step *Step) error {
-	if step.FermyonCloud {
+	if m.config.FermyonCloud {
 		return nil
 	}
 
@@ -32,7 +32,6 @@ func (m *Mixin) commandPreRun(ctx context.Context, step *Step) error {
 	return nil
 }
 
-// New azure mixin client, initialized with useful defaults.
 func New() *Mixin {
 	return &Mixin{
 		RuntimeConfig: runtime.NewConfig(),

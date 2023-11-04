@@ -10,13 +10,13 @@ import (
 func (m *Mixin) Init(ctx context.Context) error {
 	var cmd *exec.Cmd
 	if m.config.FermyonCloud {
-		//todo: make this work
-		//when we do this it spits out a code we need to
-		// give to users, along with a url
-		// it will print out "Device authorized!"
-		// when done
+		// If we hit here, it'll output to users.
+		// Need to check if there's a timeout set
+		// on this
 		cmd = m.NewCommand(ctx, "spin", "login")
 	}
+	// it's saying it can't find the platform command, and
+	// is install the cloud plugin :/
 	cmd = m.NewCommand(ctx, "spin", "platform", "login")
 
 	cmd.Stdout = m.Out
