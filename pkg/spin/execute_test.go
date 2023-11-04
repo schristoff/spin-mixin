@@ -3,7 +3,6 @@ package spin
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
 	"os"
 	"path"
 	"testing"
@@ -36,12 +35,12 @@ func TestMixin_Execute(t *testing.T) {
 			m := NewTestMixin(t)
 
 			m.Setenv(test.ExpectedCommandEnv, tc.wantCommand)
-			mixinInputB, err := ioutil.ReadFile(tc.file)
+			mixinInputB, err := os.ReadFile(tc.file)
 			require.NoError(t, err)
 
 			m.In = bytes.NewBuffer(mixinInputB)
 
-			err = m.Execute(ctx)
+			err = m.Install(ctx)
 			require.NoError(t, err, "execute failed")
 
 			if tc.wantOutput == "" {
