@@ -3,7 +3,6 @@ package spin
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"get.porter.sh/porter/pkg/exec/builder"
 )
@@ -29,17 +28,16 @@ func (m *Mixin) Install(ctx context.Context) error {
 	//this should log us in?
 	m.Init(ctx)
 
-	step.Arguments = []string{"deploy"}
-
-	os.Chdir(step.WorkingDir)
+	if m.config.FermyonCloud {
+		step.Arguments = []string{"deploy"}
+	}
+	step.Arguments = []string{"platform", "deploy"}
 
 	action.Steps[0] = step
 	_, err = builder.ExecuteSingleStepAction(ctx, m.RuntimeConfig, action)
 	if err != nil {
 		return err
 	}
-
-	//todo: Outputs?
 
 	return nil
 
