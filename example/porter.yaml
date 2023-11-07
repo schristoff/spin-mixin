@@ -1,8 +1,3 @@
-# This is the configuration for Porter
-# You must define steps for each action, but the rest is optional
-# See https://getporter.org/bundle/manifest/file-format/ for a description of all the allowed fields in this document.
-# See https://getporter.org/author-bundles for documentation on how to configure your bundle.
-# Uncomment out the sections below to take full advantage of what Porter can do!
 
 # Optional indicator of the resource type of this file
 schemaType: Bundle
@@ -17,71 +12,55 @@ name: spin-hello
 version: 0.1.0
 
 # Description of the bundle and what it does.
-description: "An example Porter configuration"
+description: "An example Spin bundle"
 
 # Registry where the bundle is published to by default
 registry: "localhost:5000"
-
-# If you want to customize the Dockerfile in use, uncomment the line below and update the referenced file. 
-# See https://getporter.org/bundle/custom-dockerfile/
-#dockerfile: template.Dockerfile
 
 # Declare and optionally configure the mixins used by the bundle
 mixins:
   - exec
   - spin:
       fermyonCloud: false
+      workingDir: "./hello-go"
 
 
-# Define the steps that should execute when the bundle is installed
+# Downloads platform plugin for spin, if fermyonCloud is false
+# Will log in with provided hippo & bindle information
+# Then run "spin deploy"
+# If fermyonCloud is true it will run the fermyonCloud
+# interactive login until logged in or endlessly
 install:
   - spin:
-      platformURL: "127.0.0.1"
-      hippoUsername: "hippo_username"
-      hippoPasswordd: "hippo_password"
-      bindleUsername: "bindle_username"
-      bindleServer: "no"
-      bindlePassword: "alsono"
+    description: "Install Spin app"
+    # you can also define it in steps 
+    #  workingDir: "./hello-go"
 
 
-# Define the steps that should execute when the bundle is upgraded
+# Upgrade runs spin deploy again 
 upgrade:
-  - exec:
-      description: "World 2.0"
-      command: ./helpers.sh
-      arguments:
-        - upgrade
+  - spin:
+    description: "Update Spin app"
 
-# Define the steps that should execute when the bundle is uninstalled
+
+# Uninstall will set a watch on the `spin.toml` and then remove
+# the  `spin.toml` file. This should uninstall the application. 
 uninstall:
-  - exec:
-      description: "Uninstall Hello World"
-      command: ./helpers.sh
-      arguments:
-        - uninstall
+  - spin:
+   description: "Uninstall Spin app"
 
-# Below is an example of how to define credentials
-# See https://getporter.org/author-bundles/#credentials
-#credentials:
-#  - name: kubeconfig
-#    path: /home/nonroot/.kube/config
-#  - name: username
-#    env: USERNAME
 
-# Below is an example of how to define parameters
-# See https://getporter.org/author-bundles/#parameters
-#parameters:
-#  - name: mysql_user
-#    type: string
-#    default: wordpress
 
-# Below is an example of how to define state variables
-# for the terraform mixin. This allows you to track
-# terraform state using the bundle instead of configuring
-# a remote backend.
-# See https://getporter.org/author-bundles/#state
-#state:
-#  - name: tfstate
-#    path: terraform/terraform.tfstate
-#  - name: tfvars
-#    path: terraform/terraform.tfvars.json
+parameters: 
+- name: platformURL
+  type: string
+- name: hippoUsername
+  type: string
+- name: hippoPassword
+  type: string
+- name: bindleServer
+  type: string
+- name: bindleUsername
+  type: string
+- name: bindlePassword
+  type: string

@@ -106,6 +106,7 @@ type Instruction struct {
 	Outputs        []Output      `yaml:"outputs,omitempty"`
 	SuppressOutput bool          `yaml:"suppress-output,omitempty"`
 	Flags          builder.Flags `yaml:"flags,omitempty"`
+	WorkingDir     string        `yaml:"workingDir, omitempty"`
 
 	// Allow the user to ignore some errors
 	// Adds the ignoreError functionality from the exec mixin
@@ -123,7 +124,6 @@ type SpinFields struct {
 	BindleUsername string `yaml:"bindleUsername"`
 	BindleServer   string `yaml:"bindleServer"`
 	BindlePassword string `yaml:"bindlePassword"`
-	WorkingDir     string `yaml:"workingDir"`
 }
 
 func (s Instruction) GetCommand() string {

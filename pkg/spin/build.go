@@ -11,7 +11,7 @@ import (
 
 const dockerfileLines = `RUN apt update && apt install -y wget tar git && \
 wget https://github.com/fermyon/spin/releases/download/v2.0.0/spin-v2.0.0-linux-amd64.tar.gz --progress=dot:giga && \
-tar -xzvf spin-v2.0.0-linux-amd64.tar.gz -C /usr/bin/  `
+tar -xzvf spin-v2.0.0-linux-amd64.tar.gz -C /usr/bin/ `
 
 // BuildInput represents stdin passed to the mixin for the build command.
 type BuildInput struct {
@@ -21,6 +21,7 @@ type BuildInput struct {
 type MixinConfig struct {
 	ClientVersion string `yaml:"clientVersion,omitempty"`
 	FermyonCloud  bool   `yaml:"fermyonCloud"`
+	WorkingDir    string `yaml:"workingDir, omitempty"`
 }
 
 func (m *Mixin) Build(ctx context.Context) error {
