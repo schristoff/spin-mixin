@@ -17,6 +17,11 @@ func (m *Mixin) Init(ctx context.Context) error {
 		// like a timer or something
 
 		cmd = m.NewCommand(ctx, "spin", "login")
+		err := cmd.Run()
+		if err != nil {
+			return err
+		}
+		return nil
 	}
 
 	// would you please install
